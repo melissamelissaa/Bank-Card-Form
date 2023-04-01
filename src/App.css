@@ -1,4 +1,4 @@
-.form,
+form,
 .inputComponentContainer {
   display: flex;
   flex-direction: column;
@@ -27,3 +27,14 @@
   vertical-align: middle;
 }
 
+.form {
+  margin-right: 100px;
+  width: 23%;
+}
+.card-images {
+  display: flex;
+  flex-direction: column;
+}
+.card {
+  width: 40%;
+}

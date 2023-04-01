@@ -7,8 +7,8 @@ import { useState } from "react";
 const CardPreview = () => {
   return (
     <div className="card-images">
-      <img src={cardFront} alt="card Front" />
-      <img src={cardBack} alt="card Back" />
+      <img className="card" src={cardFront} alt="card Front"/>
+      <img className="card" src={cardBack} alt="card Back"/>
       {/* <img src={mainDesktop} alt="background-image" /> */}
     </div>
   );
@@ -67,7 +67,7 @@ const FormContainer = (props) => {
               required
             ></input>
           </div>
-          
+
         </div>
         <InputComponent
           htmlFor="CVC"
@@ -75,6 +75,7 @@ const FormContainer = (props) => {
           placeholder="e.g. 123"
           labelText="CVC"
           required
+          className="cvc"
         />
       </div>
       <button>Confirm</button>
