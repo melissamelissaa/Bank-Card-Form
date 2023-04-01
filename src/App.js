@@ -7,8 +7,8 @@ import { useState } from "react";
 const CardPreview = () => {
   return (
     <div className="card-images">
-      <img className="card" src={cardFront} alt="card Front"/>
-      <img className="card" src={cardBack} alt="card Back"/>
+      <img className="card" src={cardFront} alt="card Front" />
+      <img className="card" src={cardBack} alt="card Back" />
       {/* <img src={mainDesktop} alt="background-image" /> */}
     </div>
   );
@@ -16,9 +16,7 @@ const CardPreview = () => {
 const InputComponent = (props) => {
   return (
     <div className="inputComponentContainer">
-      <label htmlFor={props.htmlFor}>
-        {props.labelText}
-      </label>
+      <label htmlFor={props.htmlFor}>{props.labelText}</label>
       <input
         className={props.className}
         type={props.type}
@@ -39,7 +37,6 @@ const FormContainer = (props) => {
         labelText="Cardholder Name"
         required
         stateChanger={props.setCardholderName}
-      
       />
       <InputComponent
         htmlFor="cardNumber"
@@ -48,34 +45,23 @@ const FormContainer = (props) => {
         labelText="Card Number"
         required
         stateChanger={props.setCardNumberInput}
-        
       />
       <div className="dateCvcContainer">
         <div className="inputComponentContainer">
-          <label htmlFor="Date">
-            Exp. Date (MM/YY)
-          </label>
+          <label htmlFor="Date">Exp. Date (MM/YY)</label>
           <div className="twodDateInputContainer ">
-            <input
-              type="number"
-              placeholder="MM"
-              required
-            ></input>
-            <input
-              type="number"
-              placeholder="YY"
-              required
-            ></input>
+            <input type="number" placeholder="MM" required></input>
+            <input type="number" placeholder="YY" required></input>
           </div>
-
         </div>
         <InputComponent
           htmlFor="CVC"
           type="number"
           placeholder="e.g. 123"
           labelText="CVC"
+          stateChanger={props.setCvcInput}
           required
-          className="cvc"
+          className="cvcInput"
         />
       </div>
       <button>Confirm</button>
@@ -91,11 +77,14 @@ function App() {
 
   return (
     <div className="App">
-      <CardPreview />
-      <FormContainer
-        setCardNumberInput={setCardNumberInput}
-        setCardholderName={setCardholderName}
-      />
+      <div className="div-in-app">
+        <CardPreview />
+        <FormContainer
+          setCardNumberInput={setCardNumberInput}
+          setCardholderName={setCardholderName}
+          setCvcInput={setCvcInput}
+        />
+      </div>
     </div>
   );
 }

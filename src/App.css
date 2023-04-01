@@ -1,4 +1,4 @@
-form,
+.form,
 .inputComponentContainer {
   display: flex;
   flex-direction: column;
@@ -28,13 +28,26 @@ form,
 }
 
 .form {
-  margin-right: 100px;
-  width: 23%;
+	margin-right: 100px;
+	width: 20%;
 }
+
 .card-images {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	margin-top: 100px;
 }
+
+.div-in-app {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 200px;
+}
+
 .card {
-  width: 40%;
+	width: 80%;
+}
+.cvcInput {
+  width: 100%;
 }
