@@ -4,14 +4,27 @@ import cardBack from "./images/bg-card-back.png";
 import mainDesktop from "./images/bg-main-desktop.png";
 import { useState } from "react";
 
-const CardPreview = () => {
+const CardPreview = (props) => {
   return (
     <div className="card-preview-container">
-      <img className="background-image" src={mainDesktop} alt="background-image" />
+      <img
+        className="background-image"
+        src={mainDesktop}
+        alt="background-image"
+      />
       <div className="card-images">
-        <img className="card card-front" src={cardFront} alt="card Front" />
-        <img className="card card-back" src={cardBack} alt="card Back" />
-      </div>  
+        <div className="card-front-container">
+          <img className="card card-front" src={cardFront} alt="card Front" />
+          <p>{props.cardNumberInput}</p>
+          <p>{props.cardholderNameInput}</p>
+          <p>{props.monthInput}/{props.yearInput}</p>
+
+        </div>
+        <div className="card-back-container"> 
+          <img className="card card-back" src={cardBack} alt="card Back" />
+          <p>{props.CvcInput}</p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -52,8 +65,18 @@ const FormContainer = (props) => {
         <div className="inputComponentContainer">
           <label htmlFor="Date">Exp. Date (MM/YY)</label>
           <div className="twodDateInputContainer ">
-            <input type="number" placeholder="MM" required></input>
-            <input type="number" placeholder="YY" required></input>
+            <input
+              type="number"
+              placeholder="MM"
+              onChange={(e) => props.setMonthInput(e.target.value)}
+              required
+            ></input>
+            <input
+              type="number"
+              placeholder="YY"
+              onChange={(e) => props.setYearInput(e.target.value)}
+              required
+            ></input>
           </div>
         </div>
         <InputComponent
@@ -73,17 +96,27 @@ const FormContainer = (props) => {
 
 function App() {
   const [cardNumberInput, setCardNumberInput] = useState("000 00000 0000 0000");
-  const [cardholderNameInput, setCardholderName] = useState("");
-  const [dateInput, setDateInput] = useState("");
-  const [CvcInput, setCvcInput] = useState("");
+  const [cardholderNameInput, setCardholderName] = useState("JANE APPLESEED");
+  const [monthInput, setMonthInput] = useState("00");
+  const [yearInput, setYearInput] = useState("00");
+  const [CvcInput, setCvcInput] = useState("000");
 
   return (
     <div className="App">
       <div className="div-in-app">
-        <CardPreview />
+        <CardPreview
+          cardNumberInput={cardNumberInput}
+          cardholderNameInput={cardholderNameInput}
+          monthInput={monthInput}
+          yearInput={yearInput}
+          CvcInput={CvcInput}
+        />
+
         <FormContainer
           setCardNumberInput={setCardNumberInput}
           setCardholderName={setCardholderName}
+          setMonthInput={setMonthInput}
+          setYearInput={setYearInput}
           setCvcInput={setCvcInput}
         />
       </div>
