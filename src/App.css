@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 .form,
 .inputComponentContainer {
   display: flex;
@@ -28,26 +30,56 @@
 }
 
 .form {
-	margin-right: 100px;
-	width: 20%;
+  margin-top: 5rem;
+  margin-right: 100px;
+  width: 20%;
 }
 
 .card-images {
-	display: flex;
-	flex-direction: column;
-	margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 9rem;
+  position: absolute;
+	top: 30px;
+	left: 30px;
+ 
 }
 
 .div-in-app {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
 }
 
 .card {
-	width: 80%;
+  width: 70%;
 }
+
 .cvcInput {
   width: 100%;
+}
+* {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+}
+.inputComponentContainer {
+  margin-bottom: 10px;
+}
+.card-back {
+  margin-left: 10rem;
+}
+
+.card-preview-container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.background-img {
+	position: relative;
+	top: 0;
+	left: 0;
+  height: 100vh;
 }

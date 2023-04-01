@@ -1,15 +1,17 @@
 import "./App.css";
 import cardFront from "./images/bg-card-front.png";
 import cardBack from "./images/bg-card-back.png";
-// import mainDesktop from "./images/bg-main-desktop.png";
+import mainDesktop from "./images/bg-main-desktop.png";
 import { useState } from "react";
 
 const CardPreview = () => {
   return (
-    <div className="card-images">
-      <img className="card" src={cardFront} alt="card Front" />
-      <img className="card" src={cardBack} alt="card Back" />
-      {/* <img src={mainDesktop} alt="background-image" /> */}
+    <div className="card-preview-container">
+      <img className="background-image" src={mainDesktop} alt="background-image" />
+      <div className="card-images">
+        <img className="card card-front" src={cardFront} alt="card Front" />
+        <img className="card card-back" src={cardBack} alt="card Back" />
+      </div>  
     </div>
   );
 };
@@ -64,7 +66,7 @@ const FormContainer = (props) => {
           className="cvcInput"
         />
       </div>
-      <button>Confirm</button>
+      <button className="confirm btn btn-dark w-100 mt-3">Confirm</button>
     </form>
   );
 };
