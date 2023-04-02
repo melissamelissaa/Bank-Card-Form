@@ -3,7 +3,7 @@ import cardFront from "./images/bg-card-front.png";
 import cardBack from "./images/bg-card-back.png";
 import mainDesktop from "./images/bg-main-desktop.png";
 import { useState } from "react";
-
+import cardLogo from "./images/card-logo.svg";
 const CardPreview = (props) => {
   return (
     <div className="card-preview-container">
@@ -15,14 +15,14 @@ const CardPreview = (props) => {
       <div className="card-images">
         <div className="card-front-container">
           <img className="card card-front" src={cardFront} alt="card Front" />
-          <p>{props.cardNumberInput}</p>
-          <p>{props.cardholderNameInput}</p>
-          <p>{props.monthInput}/{props.yearInput}</p>
-
+          <img src={cardLogo} alt="card Logo" className="cardLogo"/>
+          <p className="cardNumber">{props.cardNumberInput}</p>
+          <p className="cardholderName">{props.cardholderNameInput}</p>
+          <p className="date">{props.monthInput}/{props.yearInput}</p>
         </div>
         <div className="card-back-container"> 
           <img className="card card-back" src={cardBack} alt="card Back" />
-          <p>{props.CvcInput}</p>
+          <p className="Cvc">{props.CvcInput}</p>
         </div>
       </div>
     </div>
