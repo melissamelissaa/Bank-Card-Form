@@ -4,6 +4,7 @@ import cardBack from "./images/bg-card-back.png";
 import mainDesktop from "./images/bg-main-desktop.png";
 import { useState } from "react";
 import cardLogo from "./images/card-logo.svg";
+
 const CardPreview = (props) => {
   return (
     <div className="card-preview-container">
@@ -15,12 +16,14 @@ const CardPreview = (props) => {
       <div className="card-images">
         <div className="card-front-container">
           <img className="card card-front" src={cardFront} alt="card Front" />
-          <img src={cardLogo} alt="card Logo" className="cardLogo"/>
+          <img src={cardLogo} alt="card Logo" className="cardLogo" />
           <p className="cardNumber">{props.cardNumberInput}</p>
           <p className="cardholderName">{props.cardholderNameInput}</p>
-          <p className="date">{props.monthInput}/{props.yearInput}</p>
+          <p className="date">
+            {props.monthInput}/{props.yearInput}
+          </p>
         </div>
-        <div className="card-back-container"> 
+        <div className="card-back-container">
           <img className="card card-back" src={cardBack} alt="card Back" />
           <p className="Cvc">{props.CvcInput}</p>
         </div>
@@ -36,7 +39,8 @@ const InputComponent = (props) => {
         className={props.className}
         type={props.type}
         placeholder={props.placeholder}
-        onChange={(e) => props.stateChanger(e.target.value)}
+        // maxLength={5}
+        onChange={(e) => props.stateChanger(e)}
       ></input>
     </div>
   );
@@ -59,6 +63,7 @@ const FormContainer = (props) => {
         placeholder="e.g. 123 45678 9123 0000"
         labelText="Card Number"
         required
+        defaultValue={props.number}
         stateChanger={props.setCardNumberInput}
       />
       <div className="dateCvcContainer">
@@ -68,13 +73,13 @@ const FormContainer = (props) => {
             <input
               type="number"
               placeholder="MM"
-              onChange={(e) => props.setMonthInput(e.target.value)}
+              onChange={(e) => props.setMonthInput(e)}
               required
             ></input>
             <input
               type="number"
               placeholder="YY"
-              onChange={(e) => props.setYearInput(e.target.value)}
+              onChange={(e) => props.setYearInput(e)}
               required
             ></input>
           </div>
@@ -95,17 +100,56 @@ const FormContainer = (props) => {
 };
 
 function App() {
-  const [cardNumberInput, setCardNumberInput] = useState("000 00000 0000 0000");
+  const [cardNumberInput, setCardNumberInput] = useState("0000 0000 0000 0000");
   const [cardholderNameInput, setCardholderName] = useState("JANE APPLESEED");
   const [monthInput, setMonthInput] = useState("00");
   const [yearInput, setYearInput] = useState("00");
   const [CvcInput, setCvcInput] = useState("000");
+  const [splitedCardNumber, setSplitedCardNumber] = useState(
+    "0000 0000 0000 0000"
+  );
+
+  // console.log(cardNumberInput);
+  const splitCardNumber = () => {
+    for (let i = 0; i < cardNumberInput.length; i++) {
+      if (i % 4 == 0) setSplitedCardNumber(splitedCardNumber + " ");
+      if (splitedCardNumber == "0000 0000 0000 0000")
+        setSplitedCardNumber(cardNumberInput[i]);
+      else setSplitedCardNumber(splitedCardNumber + cardNumberInput[i]);
+    }
+  };    
+
+  console.log(splitedCardNumber);
+
+  const inputHandler = (e, maxLength = 50, stateChanger) => {
+    if (e.target.value.length > maxLength) {
+      let inputTextToSet = "";
+
+      for (let i = 0; i < maxLength; i++) {
+        inputTextToSet += e.target.value[i];
+      }
+
+      e.target.value = inputTextToSet;
+    } else {
+      stateChanger(e.target.value);
+    }
+  };
+
+  const cardholderNameInputHandler = (e) =>
+    inputHandler(e, 25, setCardholderName);
+  const cardNumberInputHandler = (e) => {
+    inputHandler(e, 16, setCardNumberInput);
+    // splitCardNumber();
+  };
+  const monthInputHandler = (e) => inputHandler(e, 2, setMonthInput);
+  const yearInputHandler = (e) => inputHandler(e, 2, setYearInput);
+  const cvcInputHandler = (e) => inputHandler(e, 3, setCvcInput);
 
   return (
     <div className="App">
       <div className="div-in-app">
         <CardPreview
-          cardNumberInput={cardNumberInput}
+          cardNumberInput={splitedCardNumber}
           cardholderNameInput={cardholderNameInput}
           monthInput={monthInput}
           yearInput={yearInput}
@@ -113,11 +157,12 @@ function App() {
         />
 
         <FormContainer
-          setCardNumberInput={setCardNumberInput}
-          setCardholderName={setCardholderName}
-          setMonthInput={setMonthInput}
-          setYearInput={setYearInput}
-          setCvcInput={setCvcInput}
+          setCardNumberInput={cardNumberInputHandler}
+          number={cardNumberInput}
+          setCardholderName={cardholderNameInputHandler}
+          setMonthInput={monthInputHandler}
+          setYearInput={yearInputHandler}
+          setCvcInput={cvcInputHandler}
         />
       </div>
     </div>
