@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import InputComponent from "./InputComponent";
+
 const FormContainer = (props) => {
   const confirmWindow = () => {
     Swal.fire({
@@ -8,6 +9,7 @@ const FormContainer = (props) => {
       text: "We've added your card details",
     });
   };
+
   return (
     <form className="form">
       <InputComponent
@@ -24,7 +26,6 @@ const FormContainer = (props) => {
         placeholder="e.g. 123 45678 9123 0000"
         labelText="Card Number"
         required
-        defaultValue={props.number}
         stateChanger={props.setCardNumberInput}
       />
       <div className="dateCvcContainer">

@@ -1,8 +1,10 @@
 import "./styles/App.css";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import FormContainer from "./Components/FormContainer";
 import CardPreview from "./Components/CardPreview";
 import "./styles/Responsive.css";
+
+export const AppContext = React.createContext();
 
 function App() {
   const [cardNumberInput, setCardNumberInput] = useState("0000000000000000");
@@ -17,7 +19,7 @@ function App() {
 
     str += cardNumberInput[i];
   }
-  
+
   /* 
   @param e - event
   @param maxLength - defines max length for input field
@@ -59,27 +61,30 @@ function App() {
   const yearInputHandler = (e) => inputHandler(e, 2, setYearInput);
   const cvcInputHandler = (e) => inputHandler(e, 3, setCvcInput);
 
+  const dataForContext = {
+    name: cardholderNameInput,
+    number: cardNumberInput,
+    month: monthInput,
+    year: yearInput,
+    CVC: CvcInput,
+  };
+
   return (
     <div className="App">
-      <div className="div-in-app">
-        <CardPreview
-          cardNumberInput={str}
-          cardholderNameInput={cardholderNameInput}
-          monthInput={monthInput}
-          yearInput={yearInput}
-          CvcInput={CvcInput}
-        />
-        <br />
-
-        <FormContainer
-          setCardNumberInput={cardNumberInputHandler}
-          number={cardNumberInput}
-          setCardholderName={cardholderNameInputHandler}
-          setMonthInput={monthInputHandler}
-          setYearInput={yearInputHandler}
-          setCvcInput={cvcInputHandler}
-        />
-      </div>
+      <AppContext.Provider value={dataForContext}>
+        <div className="div-in-app">
+          <CardPreview />
+          <br />
+          <FormContainer
+            setCardNumberInput={cardNumberInputHandler}
+            number={cardNumberInput}
+            setCardholderName={cardholderNameInputHandler}
+            setMonthInput={monthInputHandler}
+            setYearInput={yearInputHandler}
+            setCvcInput={cvcInputHandler}
+          />
+        </div>
+      </AppContext.Provider>
     </div>
   );
 }
