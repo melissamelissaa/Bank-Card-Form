@@ -3,6 +3,7 @@ import cardBack from "../images/bg-card-back.png";
 import mainDesktop from "../images/bg-main-desktop.png";
 import cardLogo from "../images/card-logo.svg";
 
+
 const CardPreview = (props) => {
   return (
     <div className="card-preview-container">
